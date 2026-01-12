@@ -34,6 +34,64 @@ git clone https://github.com/andrew-wc-brown/Github-Examples.git (this is a samp
 cd GitHub-Examples
 ```
 
+>You'll need to generate a GitHub Personal Access Token (PAT) 
+
+https://github.com/settings/token
+
+You will use the PAT as your password when you login 
+
+-Give it access to Contents for Commits
+
+## SSH
+
+
+```ssh
+git clone git@github.com:Ibrahimjst/ProjectIK.git
+```
+
+we will need to create our own ssh rsa key pair
+
+```sh
+sshe-keygen -t rsa
+```
+
+We can test our connection here:
+```
+ssh -T git@github.com
+```
+
+for WSL users and if you create a non default key you might need to add it
+
+```sh
+eval `ssh-agent`
+ssh-add /home/andrew/.ssh/alt-github_id_rsa
+```
+
+
+## GitHub CLI
+
+Install the CLI
+
+eg. Linux (Ubuntu)
+```sh
+(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
+	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+	&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+	&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+	&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+	&& sudo apt update \
+	&& sudo apt install gh -y
+```
+
+```
+gh auth login
+gh repo clone Ibrahimjst/ProjectIK
+```
+
+
+
 ## Commits
 
 When we want to commit code we can write git commit which will open up the commit edit message in the editor of choice.
@@ -53,6 +111,23 @@ git commit -m "add another exclamation mark"
 ```
 
 ## Branches
+
+List of branches
+
+```
+git branch
+```
+
+create branch
+```
+git branch *name of branch*
+```
+
+move to branch
+
+```
+git checkout dev
+```
 
 ##  Remotes
 
